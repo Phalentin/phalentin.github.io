@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Alg Diagram Generator</title>
+    <script>
+			function generateImage() {
+				var fmt = document.getElementById("fmt").value;
+				var pzl = document.getElementById("pzl").value;
+				var size = document.getElementById("size").value;
+				var view = document.getElementById("view").value;
+				var stage = document.getElementById("stage").value;
+				var r = document.getElementById("r").value;
+				var alg = document.getElementById("alg").value;
+				var ccase = document.getElementById("case").value;
+				var fd = document.getElementById("fd").value;
+				var fc = document.getElementById("fc").value;
+				var sch = document.getElementById("sch").value;
+				var bg = document.getElementById("bg").value;
+				var cc = document.getElementById("cc").value;
+				var co = document.getElementById("co").value;
+				var fo = document.getElementById("fo").value;
+				var dist = document.getElementById("dist").value;
+				var arw = document.getElementById("arw").value;
+				var ac = document.getElementById("ac").value;
+				var linktemplate = "http://cube.rider.biz/visualcube.php?fmt={FMT}&pzl={PZL}&size={SIZE}&view={VIEW}&stage={STAGE}&r={R}&alg={ALG}&case={CASE}&fd={FD}&fc={FC}&sch={SCH}&bg={BG}&cc={CC}&co={CO}&fo={FO}&dist={DIST}&arw={ARW}&ac={AC}";
+				var link = linktemplate.replace("{FMT}", fmt).replace("{PZL}", pzl).replace("{SIZE}", size).replace("{VIEW}", view).replace("{STAGE}", stage).replace("{R}", r).replace("{ALG}", alg).replace("{CASE}", ccase).replace("{FD}", fd).replace("{FC}", fc).replace("{SCH}", sch).replace("{BG}", bg).replace("{CC}", cc).replace("{CO}", co).replace("{FO}", fo).replace("{DIST}", dist).replace("{ARW}", arw).replace("{AC}", ac).replaceAll(" ", "%20");
+				console.log(link)
+				document.getElementById("outputimg").src=link;
+				document.getElementById("download").href=link;
+			}
+    </script>
+  </head>
+  <body>
+    <p>The images are generated using <a href="http://cube.rider.biz/visualcube.php">http://cube.rider.biz/visualcube.php</a>. This website is just providing a graphical way to generate the images.</p>
+    <div>
+        <label for="fmt">Image Format</label>
+        <select name="format" id="fmt">
+            <option value="png">PNG</option>
+            <option value="gif">GIF</option>
+            <option value="jpg">JPEG</option>
+            <option value="svg" selected="selected">SVG</option>
+            <option value="tiff">TIFF</option>
+            <option value="ico">ICO</option>
+        </select>
+    </div>
+    <div>
+        <label for="pzl">Puzzle Type</label>
+        <select name="puzzle" id="pzl">
+            <option value="1">1x1</option>
+            <option value="2">2x2</option>
+            <option value="3" selected="selected">3x3</option>
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+            <option value="7">7x7</option>
+            <option value="8">8x8</option>
+            <option value="9">9x9</option>
+            <option value="10">10x10</option>
+        </select>
+    </div>
+    <div>
+        <label for="size">Size of generated image (0 to 1024)</label>
+        <input type="number" id="size" name="size" min="0" max="1024" value="128">
+    </div>
+    <div>
+        <label for="view">Special View</label>
+        <select name="view" id="view">
+            <option value="none" selected="selected">none</option>
+            <option value="plan">plan</option>
+            <option value="trans">trans</option>
+        </select>
+    </div>
+
+        <label for="stage">Stage Mask + Rotation</label>
+        <select name="stage" id="stage">
+            <option value="none" selected="selected">none</option>
+            <option value="fl">fl</option>
+            <option value="f2l">f2l</option>
+            <option value="ll">ll</option>
+            <option value="cll">cll</option>
+            <option value="ell">ell</option>
+            <option value="oll">oll</option>
+            <option value="ocll">ocll</option>
+            <option value="oell">oell</option>
+            <option value="coll">coll</option>
+            <option value="ocell">ocell</option>
+            <option value="wv">wv</option>
+            <option value="vh">vh</option>
+            <option value="els">els</option>
+            <option value="cls">cls</option>
+            <option value="cmll">cmll</option>
+            <option value="cross">cross</option>
+            <option value="f2l_3">f2l_3</option>
+            <option value="f2l_2">f2l_2</option>
+            <option value="f2l_sm">f2l_sm</option>
+            <option value="f2l_1">f2l_1</option>
+            <option value="f2b">f2b</option>
+            <option value="line">line</option>
+            <option value="2x2x2">2x2x2</option>
+            <option value="2x2x3">2x2x3</option>
+        </select>
+        <input type="text" id="stager">
+    </div>
+    <div>
+        <label for="r">Rotation Sequence</label>
+        <input type="text" id="r" value="y45x-34">
+    </div>
+    <h3>State Definitions</h3>
+    <div>
+        <label for="alg">Algorithm to apply</label>
+        <input type="text" id="alg">
+    </div>
+    <div>
+        <label for="case">Algorithm to solve case</label>
+        <input type="text" id="case">
+    </div>
+    <div>
+        <label for="fd">Facelet Definition</label>
+        <input type="text" id="fd" value="uuuuuuuuu rrrrrrrrr fffffffff ddddddddd lllllllll bbbbbbbbb">
+    </div>
+    <div>
+        <label for="fc">Facelet Colours</label>
+        <input type="text" id="fc">
+    </div>
+    <h3>Cube Style</h3>
+		<div>
+			<label for="sch">Colour Scheme</label>
+			<input type="text" id="sch" value="yrbwog">
+		</div>
+		<div>
+			<label for="bg">Background Colour of image</label>
+			<input type="text" id="bg" value="white">
+		</div>
+		<div>
+			<label for="cc">Cube Colour</label>
+			<input type="text" id="cc" value="black">
+		</div>
+		<div>
+			<label for="co">Cube Opacity (1 to 100)</label>
+			<input type="text" id="co" value="100">
+		</div>
+		<div>
+			<label for="facelet">Cube Opacity (1 to 100)</label>
+			<input type="text" id="fo" value="100">
+		</div>
+		<div>
+			<label for="dist">Projection Distance (1 to 100)</label>
+			<input type="text" id="dist" value="5">
+		</div>
+		<h3>Added Features</h3>
+		<div>
+			<label for="arw">Arrow Definition</label>
+			<input type="text" id="arw">
+		</div>
+		<div>
+			<label for="ac">Default Arrow Colour</label>
+			<input type="text" id="ac" value="grey">
+		</div>
+		<button id="generate" onclick="generateImage()">Generate</button>
+		<br>
+		<img src="" alt="diagram" id="outputimg">
+  </body>
+</html>
