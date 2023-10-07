@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anki Algorithm Set Generator</title>
+    <script src="js/sql/sql.js"></script>
+    <script src="js/anki/genanki.js"></script>
+    <script src="js/jszip.min.js"></script>
+    <script src="js/filesaver/FileSaver.min.js"></script>
+    <script type="module" src="js/index.js"></script>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            body{
+                background-color: black;
+                color: white;
+            }
+            .subtle-link{
+                color: lightgray;
+            }
+        }
+        body{
+            padding: .5%;
+            font-family: sans-serif;
+        }
+        .input{
+            font-family: serif;
+            font-size: 1em;
+        }
+        .subtle-link{
+            text-decoration: none; 
+            color: darkgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Anki Algorithm Set Generator</h1>
+    <form id="form">
+        <p>* Required field</p>
+        <label for="name-input">Input the name of your alg set: *</label><br>
+        <input type="text" name="name-input" id="name-input" placeholder="Input name here" class="input"><br>
+        <label for="alg-input">Input your algorithms here one alg per line: *</label><br>
+        <textarea name="alg-input" id="alg-input" style="width: 30%; height: 50%;" rows="20" placeholder="Syntax:&#10;# Group&#10;Algorithm Name: R U R' U' *Note&#10;## Subgroup&#10;R U2 R' U2" class="input"></textarea><br>
+        <label for="pre-rotation">Rotations before applying the scramble:</label><br>
+        <input type="text" name="pre-rotation" id="pre-rotation" placeholder="Input rotations here" class="input"><br>
+        <label for="image-type">Display image of the case:</label><br>
+        <select name="image-type" id="image-type" class="input">
+            <option value="none">No image</option>
+            <option value="LL" selected="selected">Last Layer</option>
+            <option value="RUF">RUF Sides</option>
+            <option value="LFU">LFU Sides</option>
+        </select><br><br>
+        <input type="button" id="generate-button" value="Generate"><br><br>
+        <p>Source Code: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/">https://github.com/Phalentin/anki-alg-set-generator-js/</a></p>
+        <p>This project uses code from the following projects:</p>
+        <ul>
+            <li><a href="https://github.com/ldez/cubejs">cubejs </a>(<a href="https://github.com/ldez/cubejs/blob/master/LICENSE">MIT license</a>)</li>
+            <li><a href="https://github.com/krmanik/genanki-js">genanki-js </a>(<a href="https://opensource.org/licenses/AGPL-3.0">GNU Affero General Public License v3</a>)</li>
+        </ul>
+        <p>Created with ♡ by <a href="https://www.youtube.com/@justenoughalgorithms" class="subtle-link">Just Enough Algorithms</a></p>
+    </form>
+</body>
+</html>
