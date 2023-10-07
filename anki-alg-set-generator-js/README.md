@@ -1,10 +1,10 @@
 # Anki Alg Set Generator
 This project converts a Rubik's Cube algorithm set into an Anki deck for learning.
 
-You can use this generator on [https://phalentin.github.io/anki-alg-set-generator/](https://phalentin.github.io/anki-alg-set-generator/)
+You can use this generator on [https://phalentin.github.io/anki-alg-set-generator-js/](https://phalentin.github.io/anki-alg-set-generator-js/)
 
 # License
-anki-alg-set-generator-js is licensed under the [GNU Affero General Public License v3](https://github.com/Phalentin/phalentin.github.io/blob/main/LICENSE.txt)
+anki-alg-set-generator-js is licensed under the [GNU Affero General Public License v3](https://github.com/Phalentin/anki-alg-set-generator-js/blob/main/LICENSE.txt)
 
 ## Third Party Licenses
 ### [cubejs](https://github.com/ldez/cubejs)

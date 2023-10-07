@@ -202,7 +202,7 @@ function textInterpreter(textLines) {
       alg = alg.substring(0, asteriskIndex).trim();
     }
 
-    const cleanAlg = alg.replace(/\(/g, '').replace(/\)/g, '');
+    const cleanAlg = alg.replace(/\(/g, '').replace(/\)/g, '').replace("2'", "2");
     
     let scramble = ""
     try {
@@ -225,12 +225,13 @@ function textInterpreter(textLines) {
   Cube.initSolver();
 
   for(let line of textLines) {
-    const lineIsTagLine = line.includes('#')
+    const lineIsTagLine = line.includes('#');
     if(lineIsTagLine) {
-      tags = updateTags(line, tags)
+      tags = updateTags(line, tags);
     } else {
-      const algCard = toAlgCard(line, algNumber, tags, cube)
-      cards.push(algCard)
+      const algCard = toAlgCard(line, algNumber, tags, cube);
+      cards.push(algCard);
+      algNumber++;
     }
   } 
   return cards;
