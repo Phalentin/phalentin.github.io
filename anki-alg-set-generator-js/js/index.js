@@ -201,10 +201,12 @@ function textInterpreter(textLines) {
       note = alg.substring(asteriskIndex + 1)
       alg = alg.substring(0, asteriskIndex).trim();
     }
+
+    const cleanAlg = alg.replace(/\(/g, '').replace(/\)/g, '');
     
     let scramble = ""
     try {
-      scramble = calculateScramble(alg, cube);
+      scramble = calculateScramble(cleanAlg, cube);
 
     } catch(error) {
       alert('Invalid syntax in the algorithm field!');
