@@ -31,34 +31,82 @@
             text-decoration: none; 
             color: darkgray;
         }
+        .column {
+        float: left;
+        }
+        .left {
+            width: 65%;
+        }
+        .right {
+            width: 35%;
+        }
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
     </style>
 </head>
 <body>
-    <h1>Anki Algorithm Set Generator</h1>
-    <form id="form">
-        <p>* Required field</p>
-        <label for="name-input">Input the name of your alg set: *</label><br>
-        <input type="text" name="name-input" id="name-input" placeholder="Input name here" class="input"><br>
-        <label for="alg-input">Input your algorithms here one alg per line: *</label><br>
-        <textarea name="alg-input" id="alg-input" style="width: 30%; height: 50%;" rows="20" placeholder="Syntax:&#10;# Group&#10;Algorithm Name: R U R' U' *Note&#10;## Subgroup&#10;R U2 R' U2" class="input"></textarea><br>
-        <label for="pre-rotation">Rotations before applying the scramble:</label><br>
-        <input type="text" name="pre-rotation" id="pre-rotation" placeholder="Input rotations here" class="input"><br>
-        <label for="image-type">Display image of the case:</label><br>
-        <select name="image-type" id="image-type" class="input">
-            <option value="none">No image</option>
-            <option value="LL" selected="selected">Last Layer</option>
-            <option value="RUF">RUF Sides</option>
-            <option value="LFU">LFU Sides</option>
-        </select><br><br>
-        <input type="button" id="generate-button" value="Generate"><br><br>
-        <p>Source Code: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/">https://github.com/Phalentin/anki-alg-set-generator-js/</a></p>
-        <p>This project uses code from the following projects:</p>
-        <ul>
-            <li><a href="https://github.com/ldez/cubejs">cubejs </a>(<a href="https://github.com/ldez/cubejs/blob/master/LICENSE">MIT license</a>)</li>
-            <li><a href="https://github.com/cubing/cubing.js">cubing.js </a>(<a href="https://github.com/cubing/cubing.js/blob/main/LICENSE.md">GNU General Public License v3</a>)</li>
-            <li><a href="https://github.com/krmanik/genanki-js">genanki-js </a>(<a href="https://opensource.org/licenses/AGPL-3.0">GNU Affero General Public License v3</a>)</li>
-        </ul>
-        <p>Created with ♡ by <a href="https://www.youtube.com/@justenoughalgorithms" class="subtle-link">Just Enough Algorithms</a></p>
-    </form>
+    <div class="row">
+        <div class="column left">
+            <h1>Anki Algorithm Set Generator</h1>
+            <form id="form">
+                <p>* Required field</p>
+                <label for="name-input">Input the name of your alg set: *</label><br>
+                <input type="text" name="name-input" id="name-input" placeholder="Input name here" class="input"><br>
+                <label for="alg-input">Input your algorithms here one alg per line: *</label><br>
+                <textarea name="alg-input" id="alg-input" style="width: 90%; height: 50%;" rows="20" placeholder="Input algorithms here" class="input"></textarea><br>
+                <label for="pre-rotation">Rotations before applying the scramble:</label><br>
+                <input type="text" name="pre-rotation" id="pre-rotation" placeholder="Input rotations here" class="input"><br>
+                <label for="image-type">Display image of the case: *</label><br>
+                <select name="image-type" id="image-type" class="input">
+                    <option value="none">No image</option>
+                    <option value="LL" selected="selected">Last Layer</option>
+                    <option value="RUF">RUF Sides</option>
+                    <option value="LFU">LFU Sides</option>
+                </select><br><br>
+                <input type="button" id="generate-button" value="Generate"><br><br>
+                <p>Source Code: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/">https://github.com/Phalentin/anki-alg-set-generator-js/</a></p>
+                <p>Report bugs here: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/issues">https://github.com/Phalentin/anki-alg-set-generator-js/issues/</a></p>
+                <p>This project uses code from the following projects:</p>
+                <ul>
+                    <li><a href="https://github.com/ldez/cubejs">cubejs </a>(<a href="https://github.com/ldez/cubejs/blob/master/LICENSE">MIT license</a>)</li>
+                    <li><a href="https://github.com/cubing/cubing.js">cubing.js </a>(<a href="https://github.com/cubing/cubing.js/blob/main/LICENSE.md">GNU General Public License v3</a>)</li>
+                    <li><a href="https://github.com/krmanik/genanki-js">genanki-js </a>(<a href="https://opensource.org/licenses/AGPL-3.0">GNU Affero General Public License v3</a>)</li>
+                </ul>
+                <p>Created with ♡ by <a href="https://www.youtube.com/@justenoughalgorithms" class="subtle-link">Just Enough Algorithms</a></p>
+            </form>
+        </div>
+        <div class="column right">
+            <h2>Syntax Guide: </h2>
+            <h3>Notation: </h3>
+            <p>Currently, only 3x3 notation is supported. Besides the standard notation, the following special moves and combinations of them are also possible (obviously not only with R moves): 
+                <ul>
+                    <li>r</li>
+                    <li>Rw</li>
+                    <li>R*</li>
+                    <li>R3 (any number is possible)</li>
+                </ul>
+            </p>
+            <h3>Groups and Subgroups</h3>
+            <p>Groups and Subgroups can be created using a hastag like in the following example: </p>
+            <pre><code># Group 1
+R U R' U R U2 R'
+## A Subgroup
+R U R' F' R U R' U' R' F R2 U' R'</code></pre>
+            <p>The more hashtags there are, the lower order is the subgroup that's created.</p>
+            <p>Keep in mind, that in the generation process, the group names are converted to all lowercase and spaces are replaced with hyphens.</p>
+            <h3>Algorithm Names</h3>
+            <p>By default, the algorithms are just named with a number corresponding to their order. You can give your algorithms custom names, by typing the name in front of the algorithm and then adding a colon. That would look like this:</p>
+            <pre><code>Ua-Perm: R2 U' S' U2 S U' R2</code></pre>
+            <h3>Notes</h3>
+            <p>You can add notes to your algorithms by typing an asterisk after the algorithm and then adding your note afterwards. That would look like this:</p>
+            <pre><code>R2 U' S' U2 S U' R2 *Recognition: full block on left, adjacent colors front</code></pre>
+            <p>A note will only be shown in Anki, if the answer is revealed.</p>
+            <h3>Combinations</h3>
+            <p>Of course you can also combine algorithm names and notes.</p>
+        </div>
+    </div>
 </body>
 </html>

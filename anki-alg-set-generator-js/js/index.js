@@ -165,8 +165,9 @@ function textInterpreter(textLines) {
    * @param {int} algNumber Number for naming algorithms with unspecified names (Format: #XX)
    * @param {Cube} cube cube object, so the solver doesn't have to be initialized for every card
    * @param {string[]} tags Currently valid tags
+   * @param {int} lineNumber So that the line can be specified when there's an error
    */
-  function toAlgCard(line, algNumber, tags, cube) {
+  function toAlgCard(line, algNumber, tags, cube, lineNumber) {
     /**
      * Returns a scramble to an algorithm
      * @param {string} alg Must be a valid algorithm
@@ -174,16 +175,40 @@ function textInterpreter(textLines) {
      * @returns {string} Scramble to the entered algorithm
      */
     function calculateScramble(alg, cube) {
-      cube.identity()
+      /**
+       * normalizes the inputted notation in a way that it can be processed by cubejs
+       * @param {string} alg algorithm
+       */
+      function normalizeNotation(alg) {
+        const moveList = alg.split(' ');
+        let normalizedAlg = '';
+
+        for(let move of moveList) {
+          move = move.replace(/[\(\)\*]/g, ' ');
+          move = move.includes('w') ? move.replace(/w/g, '').toLowerCase() : move //Turn Rw into r
+          
+          const baseMove = move.replace(/[\d']/g, '');
+
+          const amount = ((move.includes("'") ? 2 : 0) + (/\d/.test(move) ? parseInt(move.replace(/\D/g, '')) : 1)) % 4;
+          normalizedAlg += amount == 0 ? '' : (baseMove + (amount == 2 ? '2' : '') + (amount == 3 ? "'" : '') + ' ');
+        }
+
+        return normalizedAlg;
+      }
+
+      const normalizedAlg = normalizeNotation(alg);
+
+
+      cube.identity();
       
-      cube.move(alg);
+      cube.move(normalizedAlg);
       const scramble = cube.solve();
 
       return scramble;
     }
 
     let algName = '#' + algNumber;
-    let note = "";
+    let note = '';
     let alg = line;
     
     const lineIncludesAlgName = line.includes(':');
@@ -201,16 +226,15 @@ function textInterpreter(textLines) {
       note = alg.substring(asteriskIndex + 1)
       alg = alg.substring(0, asteriskIndex).trim();
     }
-
-    const cleanAlg = alg.replace(/\(/g, '').replace(/\)/g, '').replace("2'", "2");
     
     let scramble = ""
     try {
-      scramble = calculateScramble(cleanAlg, cube);
+      scramble = calculateScramble(alg, cube);
 
     } catch(error) {
-      alert('Invalid syntax in the algorithm field!');
-      throw new Error('Invalid syntax in algorithm field')
+      alert('Invalid syntax in the algorithm field on line ' + lineNumber + "!");
+      console.log(error)
+      throw new Error('Invalid syntax in algorithm field');
     }
 
     const algCard = new AlgCard(algName, alg, note, scramble, tags);
@@ -224,15 +248,17 @@ function textInterpreter(textLines) {
   let cube = new Cube();
   Cube.initSolver();
 
+  let lineNumber = 1;
   for(let line of textLines) {
     const lineIsTagLine = line.includes('#');
     if(lineIsTagLine) {
       tags = updateTags(line, tags);
     } else {
-      const algCard = toAlgCard(line, algNumber, tags, cube);
+      const algCard = toAlgCard(line, algNumber, tags, cube, lineNumber);
       cards.push(algCard);
       algNumber++;
     }
+    lineNumber++;
   } 
   return cards;
 }
