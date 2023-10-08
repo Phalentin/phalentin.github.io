@@ -12,6 +12,10 @@ anki-alg-set-generator-js is licensed under the [GNU Affero General Public Licen
 <br>Copyright (c) 2013-2017 Petri Lehtinen <petri@digip.org>
 <br>Copyright (c) 2018 Ludovic Fernandez
 
+### [cubing.js](https://github.com/cubing/cubing.js)
+[GNU General Public License v3](https://github.com/cubing/cubing.js/blob/main/LICENSE.md)
+<br>
+
 ### [genanki-js](https://github.com/krmanik/genanki-js/)
 [GNU Affero General Public License v3](https://github.com/krmanik/genanki-js/blob/main/License.md)
 <br>Copyright (c) 2021 Mani
