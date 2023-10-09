@@ -184,7 +184,7 @@ function textInterpreter(textLines) {
         let normalizedAlg = '';
 
         for(let move of moveList) {
-          move = move.replace(/[\(\)\*]/g, ' ');
+          move = move.replace(/[\(\)\*]/g, '');
           move = move.includes('w') ? move.replace(/w/g, '').toLowerCase() : move //Turn Rw into r
           
           const baseMove = move.replace(/[\d']/g, '');
@@ -243,20 +243,33 @@ function textInterpreter(textLines) {
 
   let tags = []
   let cards = []
-  let algNumber = 1;
+  let algNumber = 0;
   
   let cube = new Cube();
   Cube.initSolver();
 
   let lineNumber = 1;
+
+  
+  let lineCounter = 0;
+  for(let line of textLines) {
+    const lineIsTagLine = line.includes('#');
+    if(!lineIsTagLine) {
+      lineCounter++;
+    }
+  }
+
   for(let line of textLines) {
     const lineIsTagLine = line.includes('#');
     if(lineIsTagLine) {
       tags = updateTags(line, tags);
     } else {
+      algNumber++;
+      while(algNumber.toString().length < lineCounter.toString().length) { //adds zeros in front of the number, so that all alg numbers have the same amount of digits
+        algNumber = "0" + algNumber;
+      }
       const algCard = toAlgCard(line, algNumber, tags, cube, lineNumber);
       cards.push(algCard);
-      algNumber++;
     }
     lineNumber++;
   } 
@@ -287,7 +300,7 @@ function generatePackage(algs, deckName, imageType, preRotations) {
 
 function formSubmit() {
   const name = document.getElementById('name-input').value;
-  const textLines = document.getElementById('alg-input').value.split('\n');
+  const textLines = document.getElementById('alg-input').value.trim().split('\n');
   const preRotations = document.getElementById('pre-rotation').value;
   const imageType = document.getElementById('image-type').value;
 
