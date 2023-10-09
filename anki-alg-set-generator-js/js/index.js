@@ -223,21 +223,21 @@ function textInterpreter(textLines) {
     if(lineIncludesNote) {
       const asteriskIndex = alg.indexOf('*');
       
-      note = alg.substring(asteriskIndex + 1)
+      note = alg.substring(asteriskIndex + 1);
       alg = alg.substring(0, asteriskIndex).trim();
     }
     
-    let scramble = ""
+    let scramble = '';
     try {
       scramble = calculateScramble(alg, cube);
 
     } catch(error) {
-      alert('Invalid syntax in the algorithm field on line ' + lineNumber + "!");
-      console.log(error)
+      alert('Invalid syntax in the algorithm field on line ' + lineNumber + ".");
+      console.error(error);
       throw new Error('Invalid syntax in algorithm field');
     }
-
-    const algCard = new AlgCard(algName, alg, note, scramble, tags);
+    
+    const algCard = new AlgCard(algName, alg, note, scramble, [...tags]);
     return algCard;
   }
 
@@ -265,22 +265,20 @@ function textInterpreter(textLines) {
 
 function generatePackage(algs, deckName, imageType, preRotations) {
   let deck = new Deck(+new Date, deckName);
+  let usedModel = undefined;
+
   if(imageType == 'none') {
-    for(let alg of algs) {
-      deck.addNote(noneModel.note([alg.name, alg.alg, alg.note, alg.scramble, preRotations], alg.tags));
-    }
+    usedModel = noneModel;
   } else if(imageType == 'LL') {
-    for(let alg of algs) {
-      deck.addNote(llModel.note([alg.name, alg.alg, alg.note, alg.scramble, preRotations], alg.tags));
-    }
+    usedModel = llModel;
   } else if(imageType == 'RUF') {
-    for(let alg of algs) {
-      deck.addNote(rufModel.note([alg.name, alg.alg, alg.note, alg.scramble, preRotations], alg.tags));
-    }
+    usedModel = rufModel;
   } else if(imageType == 'LFU') {
-    for(let alg of algs) {
-      deck.addNote(lfuModel.note([alg.name, alg.alg, alg.note, alg.scramble, preRotations], alg.tags));
-    }
+    usedModel = lfuModel;    
+  }
+
+  for(let alg of algs) {
+    deck.addNote(usedModel.note([alg.name, alg.alg, alg.note, alg.scramble, preRotations], alg.tags));
   }
   const ankiPackage = new Package();
   ankiPackage.addDeck(deck);
