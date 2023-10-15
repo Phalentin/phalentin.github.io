@@ -9,43 +9,7 @@
     <script src="js/jszip.min.js"></script>
     <script src="js/filesaver/FileSaver.min.js"></script>
     <script type="module" src="js/index.js"></script>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            body{
-                background-color: black;
-                color: white;
-            }
-            .subtle-link{
-                color: lightgray;
-            }
-        }
-        body{
-            padding: .5%;
-            font-family: sans-serif;
-        }
-        .input{
-            font-family: serif;
-            font-size: 1em;
-        }
-        .subtle-link{
-            text-decoration: none; 
-            color: darkgray;
-        }
-        .column {
-        float: left;
-        }
-        .left {
-            width: 65%;
-        }
-        .right {
-            width: 35%;
-        }
-        .row:after {
-        content: "";
-        display: table;
-        clear: both;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="row">
@@ -56,7 +20,7 @@
                 <label for="name-input">Input the name of your alg set: *</label><br>
                 <input type="text" name="name-input" id="name-input" placeholder="Input name here" class="input"><br>
                 <label for="alg-input">Input your algorithms here one alg per line: *</label><br>
-                <textarea name="alg-input" id="alg-input" style="width: 90%; height: 50%;" rows="20" placeholder="Input algorithms here" class="input"></textarea><br>
+                <textarea name="alg-input" id="alg-input" rows="20" placeholder="Input algorithms here" class="input"></textarea><br>
                 <label for="pre-rotation">Rotations before applying the scramble:</label><br>
                 <input type="text" name="pre-rotation" id="pre-rotation" placeholder="Input rotations here" class="input"><br>
                 <label for="image-type">Display image of the case: *</label><br>
@@ -66,14 +30,14 @@
                     <option value="RUF">RUF Sides</option>
                     <option value="LFU">LFU Sides</option>
                 </select><br><br>
-                <input type="button" id="generate-button" value="Generate"><br><br>
-                <p>Source Code: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/">https://github.com/Phalentin/anki-alg-set-generator-js/</a></p>
-                <p>Report bugs here: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/issues">https://github.com/Phalentin/anki-alg-set-generator-js/issues/</a></p>
+                <input type="button" id="generate-button" value="Generate" class="button"><br><br>
+                <p>Source Code: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/" class="link">https://github.com/Phalentin/anki-alg-set-generator-js/</a></p>
+                <p>Report bugs here: <a href="https://github.com/Phalentin/anki-alg-set-generator-js/issues" class="link">https://github.com/Phalentin/anki-alg-set-generator-js/issues/</a></p>
                 <p>This project uses code from the following projects:</p>
                 <ul>
-                    <li><a href="https://github.com/ldez/cubejs">cubejs </a>(<a href="https://github.com/ldez/cubejs/blob/master/LICENSE">MIT license</a>)</li>
-                    <li><a href="https://github.com/cubing/cubing.js">cubing.js </a>(<a href="https://github.com/cubing/cubing.js/blob/main/LICENSE.md">GNU General Public License v3</a>)</li>
-                    <li><a href="https://github.com/krmanik/genanki-js">genanki-js </a>(<a href="https://opensource.org/licenses/AGPL-3.0">GNU Affero General Public License v3</a>)</li>
+                    <li><a href="https://github.com/ldez/cubejs" class="link">cubejs </a>(<a href="https://github.com/ldez/cubejs/blob/master/LICENSE" class="link">MIT license</a>)</li>
+                    <li><a href="https://github.com/cubing/cubing.js" class="link">cubing.js </a>(<a href="https://github.com/cubing/cubing.js/blob/main/LICENSE.md" class="link">GNU General Public License v3</a>)</li>
+                    <li><a href="https://github.com/krmanik/genanki-js" class="link">genanki-js </a>(<a href="https://opensource.org/licenses/AGPL-3.0" class="link">GNU Affero General Public License v3</a>)</li>
                 </ul>
                 <p>Created with ♡ by <a href="https://www.youtube.com/@justenoughalgorithms" class="subtle-link">Just Enough Algorithms</a></p>
             </form>
