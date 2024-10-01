@@ -36,12 +36,6 @@ main {
     overflow-x: auto;
 }
 
-h1 .header {
-    border-bottom: 2px solid var(--fg);
-    width: 100%;
-    display: block;
-}
-
 /* Don't change font size in headers. */
 h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
     font-size: unset;
@@ -52,6 +46,9 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .boring { opacity: 0.6; }
 .hide-boring .boring { display: none; }
 .hidden { display: none !important; }
+
+h2, h3 { margin-block-start: 2.5em; }
+h4, h5 { margin-block-start: 2em; }
 
 .header + .header h3,
 .header + .header h4,
@@ -109,6 +106,7 @@ h6:target::before {
 .content p { line-height: 1.45em; }
 .content ol { line-height: 1.45em; }
 .content ul { line-height: 1.45em; }
+.content a { text-decoration: none; }
 .content a:hover { text-decoration: underline; }
 .content img, .content video { max-width: 100%; }
 .content .header:link,
@@ -157,13 +155,13 @@ blockquote {
 }
 
 .warning {
-    margin: 0px;
-    border-radius: 1em;
-    border: solid var(--warning-fg);
-    padding: 15px;
-    color: var(--warning-fg);
-    border-color: var(--warning-fg);
-    background-color: var(--warning-bg);
+    margin: 20px;
+    padding: 0 20px;
+    border-inline-start: 2px solid var(--warning-border);
+}
+
+blockquote .warning:before {
+    background-color: var(--quote-bg);
 }
 
 kbd {
