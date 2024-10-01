@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>APB Method</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="about.html"><strong aria-hidden="true">1.</strong> About this Book</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction to APB</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">3x3</li><li class="chapter-item expanded "><a href="tutorial.html"><strong aria-hidden="true">3.</strong> APB Tutorial</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/223.html"><strong aria-hidden="true">3.1.</strong> 2x2x3</a></li><li class="chapter-item expanded "><a href="tutorial/pair.html"><strong aria-hidden="true">3.2.</strong> dBR Pair</a></li><li class="chapter-item expanded "><a href="tutorial/eo.html"><strong aria-hidden="true">3.3.</strong> EO</a></li><li class="chapter-item expanded "><a href="tutorial/lxs.html"><strong aria-hidden="true">3.4.</strong> LXS</a></li><li class="chapter-item expanded "><a href="tutorial/zbll.html"><strong aria-hidden="true">3.5.</strong> ZBLL</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Dark</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"><img src="/favicon.svg" alt="APB Icon" style="width:1em;height:1em;vertical-align: middle;margin-top: -5px;">APB Method</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="about-this-book"><a class="header" href="#about-this-book">About this Book</a></h1>
+<p>Hi, I am <a href="https://www.youtube.com/@justenoughalgorithms">JustEnoughAlgorithms</a> and I'm working on this because I want to get more people to use this method. This book is heavily inspired by the <a href="https://zzmethod.com">zzmethod.com</a> website by <a href="https://www.youtube.com/@crystalcuber">crystalcuber</a>.
+The purpose of this book is to be a learning resource for all levels of APB users, as well as to showcase this method to users of other methods like CFOP, Roux or ZZ. I've been maining this method since autumn of 2023 and have since beaten all of my old PBs that I set with Roux.
+This book is written using the rust-based <a href="https://github.com/rust-lang/mdBook">mdBook</a>-utility.</p>
+<h2 id="links"><a class="header" href="#links">Links<hr></a></h2>
+<ul>
+<li>ZZMethod Website: <a href="https://www.zzmethod.com/">zzmethod.com</a></li>
+<li>My YouTube Channel: <a href="https://www.youtube.com/@justenoughalgorithms">JustEnoughAlgorithms</a></li>
+<li>crystalcuber's YouTube Channel: <a href="https://www.youtube.com/@crystalcuber">crystalcuber</a></li>
+<li>mdBook's GitHub repo: <a href="https://github.com/rust-lang/mdBook">mdBook</a></li>
+<li>GitHub repo of this book: <a href="https://github.com/Phalentin/APB-Method-Website">APB Method Website</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-apb"><a class="header" href="#introduction-to-apb">Introduction to APB</a></h1>
+<p><image class="right" alt="Symbolic image of the APB method" src="/images/apb-icon.svg"><sup class="footnote-reference"><a href="#apb-icon">1</a></sup></p>
+<p>APB was originally deveolped by James Straughon aka. Athefre. It stands for Athefre's Pair and Block.</p>
+<h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
+<p>Standard APB consists of 5 steps:</p>
+<ol>
+<li><a href="tutorial/223.html"><strong>2x2x3</strong></a>: Solve a 2x2x3 block in the bottom-left. This is usually accomplished by building a Roux-style 1x2x3 block and then extending it by solving the DF and DB edges.</li>
+<li><a href="tutorial/pair.html"><strong>dBR Pair</strong></a>: The back-right F2L pair is solved intuitively.</li>
+<li><a href="tutorial/eo.html"><strong>EO</strong></a>: The edge-orientation of the remaining edges is solved algorithmically (11 algorithms).</li>
+<li><a href="tutorial/lxs.html"><strong>LXS</strong></a>: The remaining three F2L pieces are solved algorithmically (116 algorithms).</li>
+<li><a href="tutorial/zbll.html"><strong>ZBLL</strong></a>: The last layer is solved (493 algorithms).</li>
+</ol>
+<p>This resolves to a hefty number of 620 algorithms. This number can be reduced to 39, by solving LXS intuitively (for which you do need to know the 20 F2L last slot cases) and using OCLL + PLL for the last layer.</p>
+<hr>
+<h2 id="image-generation-links"><a class="header" href="#image-generation-links">Image generation links</a></h2>
+<div class="footnote-definition" id="apb-icon"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=dsdsybdsbrrdrrrdsrdswbbwbbd&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=dsdsybdsbrrdrrrdsrdswbbwbbd&amp;bg=t</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="apb-tutorial"><a class="header" href="#apb-tutorial">APB Tutorial</a></h1>
+<p>This section will teach you how to use APB in speedsolves. For the purpose of easier explaining, the tutorial will be given with white as the bottom color, even though it is strongly recommended to be able to use white and yellow as your bottom color (x2y color neutrality).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="2x2x3"><a class="header" href="#2x2x3">2x2x3</a></h1>
+<p><image class="right" alt="Rubik's Cube with the 2x2x3 block on the bottom-left completed" src="/images/tutorial/223/223.svg"><sup class="footnote-reference"><a href="#223image">1</a></sup><br>
+The first step of APB is the creation of a 2x2x3 block in the bottom-left. This can be approached in multiple different ways, altough creating a Roux-style 1x2x3-block and then extending it is the best option most of the time.</p>
+<h2 id="ways-of-creating-the-2x2x3"><a class="header" href="#ways-of-creating-the-2x2x3">Ways of Creating the 2x2x3:</a></h2>
+<h3 id="1x2x3--2x2x3"><a class="header" href="#1x2x3--2x2x3">1x2x3 → 2x2x3:</a></h3>
+<p>This is the preffered and on most scrambles the most efficent way to create the 2x2x3. There are two ways to create the block in this way: Either you create the dL block first and then solve the other two edges or you create the Dl block first and then connect the left two edges. Because the first way is more intuitive, I'll explain it like that, but the other way is totally possible.</p>
+<ol>
+<li><strong>Create the 1x2x3:</strong> This can be done by connecting a white edge to its other colored center, then the two adjacent F2L-pairs can be solved. Note, that the block has to be made on the left side and you should not use any cube rotations during the whole solve, so you have to take advantage of wide r moves to build your F2L-pairs. Obviously, there are different ways of building a 2x2x3 block, but that can be explored in Roux tutorials.</li>
+<li><strong>Extend to a 2x2x3:</strong> At a beginner level, you should first match the centers in the M slice to the 1x2x3 block and then bring one of the two dM edges into the top layer. Depending on its orientation, it can be inserted with <code>r U2 r'</code> / <code>r' U2 r</code> or <code>r U' r'</code> / <code>r' U r</code>. At higher levels, this step is often done by solving the dM edges in relation to each other and then joining them with the white center using M moves.</li>
+</ol>
+<h3 id="2x2x2--2x2x3"><a class="header" href="#2x2x2--2x2x3">2x2x2 → 2x2x3</a></h3>
+<p>This way can be really efficient if the scramble is good. During the whole process, make sure not to rotate.</p>
+<ol>
+<li><strong>Create 1x2x2 square:</strong> Either you create a Center-Edge-Corner-Edge square, or you create a Center-Edge-Center square,</li>
+<li><strong>Join another 1x2x2 square:</strong> You have to join one of the other type (if you made a CECE square first, you now have to join a CEC square)</li>
+<li><strong>Join yet another 1x2x2 square:</strong> This square needs to be a Center-Edge-Corner-Edge square.</li>
+</ol>
+<h3 id="three-cross-edges--two-f2l-pairs"><a class="header" href="#three-cross-edges--two-f2l-pairs">Three Cross Edges + Two F2L pairs</a></h3>
+<div class="warning"><b>Warning:</b><br>This method should only be used if the scramble allows for an efficient solution with it. Do not solve the 2x2x3 like this by default.</div>
+<ol>
+<li><strong>Solve three cross pieces:</strong> Solve the cross like you do with CFOP, but you leave out one of the edges. Ideally, you should orient the edges of the two F2L-pairs that you're going to solve in the next step at the same time.</li>
+<li><strong>Solve two F2L pairs:</strong> Solve the two left F2L pairs rotationless.</li>
+</ol>
+<hr>
+<h2 id="image-generation-links-1"><a class="header" href="#image-generation-links-1">Image generation links</a></h2>
+<div class="footnote-definition" id="223image"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;stage=2x2x3-y&amp;r=y-15x20&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;stage=2x2x3-y&amp;r=y-15x20&amp;bg=t</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dbr-pair"><a class="header" href="#dbr-pair">dBR Pair</a></h1>
+<p><image class="right" alt="Rubik's Cube with the dBR pair step completed" src="/images/tutorial/pair/pair.svg"><sup class="footnote-reference"><a href="#pair">1</a></sup><br></p>
+<p>The second step of APB is the creation and insertion of the back-right F2L pair.</p>
+<h2 id="creating-the-pair"><a class="header" href="#creating-the-pair">Creating the pair</a></h2>
+<p>Creating a pair is always possible using only <code>R</code> and <code>U</code> moves and no rotations (altough sometimes there are better solutions with <code>F</code> moves). If you are unsure about how to solve a case, try putting the edge into the U layer and the corner in DFR or DFB so that the white sticker is on the right side. Then you can put the edge into UF or UB and then join it with the corner using R moves. <br></p>
+<h2 id="inserting-the-pair"><a class="header" href="#inserting-the-pair">Inserting the pair</a></h2>
+<p>If the pair is oriented, you can just insert it using R and U moves. If it is misoriented however, you should put the pair on the right and insert it with <code>f R' f'</code>.</p>
+<h2 id="algorithmic-solutions"><a class="header" href="#algorithmic-solutions">Algorithmic solutions</a></h2>
+<p>At a higher level, this step can be done algorithmically. The algorithms can be found in <a href="https://docs.google.com/spreadsheets/d/1U1nwq_-HLeDgajuAOVRaH2Jo7X9zSTEBrnIRSv3hzeg">Liam Highducheck's sheet</a>. It is recommended to at least take a look at the harder cases when you feel like your solution is long. This is especially the case for cases with a misoriented edge, as there are often fast algorithmic solutions using the S slice. However, it's not worth it to learn all of the 89 algorithms, as it is also important to be able to come up with solutions yourself and it's smarter to use your time otherwise.</p>
+<hr>
+<h2 id="image-generation-links-2"><a class="header" href="#image-generation-links-2">Image generation links</a></h2>
+<div class="footnote-definition" id="pair"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=ddddyddddddddrrddrdddbbdbbd&amp;r=y30x-30&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=ddddyddddddddrrddrdddbbdbbd&amp;r=y30x-30&amp;bg=t</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="eo"><a class="header" href="#eo">EO</a></h1>
+<p><image class="right" alt="Rubik's Cube with the EO step completed" src="/images/tutorial/eo/eo.svg"><sup class="footnote-reference"><a href="#eo">1</a></sup><br></p>
+<p>Edge orientation is the hardest concept in APB. If you already know what EO is, you can skip to <a href="tutorial/eo.html#how-to-solve-eo-in-apb">How to solve EO in APB</a>.</p>
+<h2 id="what-is-edge-orientaiton"><a class="header" href="#what-is-edge-orientaiton">What is edge orientaiton?</a></h2>
+<p><a href="https://www.zzmethod.com/">zzmethod.com</a> already made a great video explaining edge orientation in the context of ZZ, if you only want to know about EO in general, you only have to watch until 7:42. Alternatively you can read the written tutorial below.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fxwVmTI5nGM?si=w3qQ3vCwifh7QjYc&amp;start=13" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>The orientation is a property of each edge on the cube. An edge can either be <em>good</em> or <em>bad</em>. An edge is good, if it can be solved with R, U, L, D and B moves. An edge is bad, if F or B moves are required to solve it.</p>
+<h2 id="how-to-recognize-if-an-edge-is-good-or-bad"><a class="header" href="#how-to-recognize-if-an-edge-is-good-or-bad">How to recognize if an edge is good or bad</a></h2>
+<p>You can recognize the orientation of an edge by looking at its colors. If the edge has white or yellow on it (or the top/bottom color respectively), the white face must be:</p>
+<ul>
+<li>on the top or bottom for U and D layer edges</li>
+<li>on front or at the back for the E layer edges</li>
+</ul>
+<p>for the edge to be considered <em>good</em>.
+If the edge doesn't have white or yellow on it, the front/back color takes the role of white or yellow respectively.</p>
+<h2 id="how-to-solve-eo-in-apb"><a class="header" href="#how-to-solve-eo-in-apb">How to solve EO in APB</a></h2>
+<div class="warning"><b>Note:</b><br>In the beginnings of APB, the pair was created and then left where it happened to be. It was then inserted while doing edge orientation in the next step. To learn more about this, see <a href="tutorial/variations/eopair.html">EOPair</a>. This way of doing the pair and edge oriantation was disbanded, because it only saved 0.3 moves on average, but required 117 more algorithms.</div>
+<h3 id="recognition"><a class="header" href="#recognition">Recognition</a></h3>
+<p>In the EO step, six edges have to be oriented. Five of them have white or yellow on them, so the recognition is no problem. The sixth edge, beloning into FR, should be tracked during pair creation. Make sure not to look at the back or left face of the UL and UB edges respectively. Since you have already tracked edge belonging into FR, if the top color is not white/yellow, the edge is misoriented (except if the edge beloning into FR is in one of these places of course).</p>
+<h3 id="orienting-the-edges"><a class="header" href="#orienting-the-edges">Orienting the edges</a></h3>
+<p>In APB, the edges are oriented algorithmically. These algorithms can be found in the <a href="https://docs.google.com/spreadsheets/d/1Hs9ikHz-4cfbqBfqvuvE8X9sjCb4Jtm482ZvsFQA2rY/">EOpair sheet</a>. Note that this sheet is not fully up do date and thus still includes all the 128 EOPair algorithms. You only need to learn the algorithms in the "dBR Solved EO" tab.</p>
+<hr>
+<h2 id="image-generation-links-3"><a class="header" href="#image-generation-links-3">Image generation links</a></h2>
+<div class="footnote-definition" id="eo"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=dsdsysdsddsdsrrdsrdsdbbsbbd&amp;r=y30x-30&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;fc=dsdsysdsddsdsrrdsrdsdbbsbbd&amp;r=y30x-30&amp;bg=t</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lxs"><a class="header" href="#lxs">LXS</a></h1>
+<p><image class="right" alt="Rubik's Cube with the EO step completed" src="/images/tutorial/lxs/lxs.svg"><sup class="footnote-reference"><a href="#lxs">1</a></sup><br>
+LXS is the best step of the APB method. It is extremely fast and the recognition is super easy. Even though there are 116 algorithms, they are extremely easy to learn and many achieve to learn them within a few days. The algorithms can be found in <a href="https://docs.google.com/spreadsheets/d/1P2DB0SyA1BrezYJ_g7RJ7_l32Ilxq7lLtr53zlG_TUU/">Athefre's sheet</a>.</p>
+<h2 id="beginner-approach-to-lxs"><a class="header" href="#beginner-approach-to-lxs">Beginner Approach to LXS</a></h2>
+<p>If you haven't learned all of the LXS algorithms yet, you can solve these three pieces according to the following method:</p>
+<ol>
+<li>Solve the DR edge by either putting it in UL and then doing <code>S R2 S' R2</code> or, if the edge is in FR, by doing <code>R' U' R' U R</code>.</li>
+<li>Solve the remainging F2L pair intuitively or by using the <em>DR edge at DR</em> algorithms in <a href="https://docs.google.com/spreadsheets/d/1P2DB0SyA1BrezYJ_g7RJ7_l32Ilxq7lLtr53zlG_TUU/">Athefre's LXS sheet</a>.</li>
+</ol>
+<p>Do keep in mind that your goal should be to learn all of the 116 LXS algorithms. If you don't want to learn this many algorithms, use Roux or CFOP.</p>
+<hr>
+<h2 id="image-generation-links-4"><a class="header" href="#image-generation-links-4">Image generation links</a></h2>
+<div class="footnote-definition" id="lxs"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;stage=vh&amp;r=y30x-30&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;stage=vh&amp;r=y30x-30&amp;bg=t</a></p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zbll"><a class="header" href="#zbll">ZBLL</a></h1>
+<p><image class="right" alt="Rubik's Cube with the EO step completed" src="/images/tutorial/zbll/zbll.svg"><sup class="footnote-reference"><a href="#zbll">1</a></sup><br></p>
+<p>ZBLL is the last and simultaneously the hardest step of APB. This set contains 493 algorithms. Good sources for ZBLL algorithms are:</p>
+<ul>
+<li><a href="https://speedcubedb.com/a/ZBLL"><strong>SpeedCubeDB ZBLL:</strong></a> big selection of algorithms, but the top algorithm is often not the best one</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1BiQZkCZvTDRlW6Y6jTBHXPPjZF9k55x8YJgXXs5nhCs/"><strong>Teri's ZBLL:</strong></a> really optimised algorithms, but getting the right fingertricks can be tricky. These algorithms require a lot of practice and might be riskier than you'd like.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1-uwmZHf4vwJxFgeB3-TiF8MQ0RFSS30d5CUK96PoIwk/"><strong>Juju ZBLL:</strong></a> good algorithms that are used by a world-class ZBLL user. Sometimes there are better algorithms available.</li>
+<li><a href="https://pepkin88.me/zbll-explorer/"><strong>ZBLL Explorer:</strong></a> big selection of algorithms, better ranking than SpeedCubeDB's, shows the relation between cases</li>
+</ul>
+<p>I'd recommend learning the ZBLL subsets in an order similar to this:</p>
+<ol>
+<li>U, T, L</li>
+<li>Pi, H</li>
+<li>Sune, Antisune</li>
+</ol>
+<h2 id="beginner-approach-to-the-last-layer-in-apb"><a class="header" href="#beginner-approach-to-the-last-layer-in-apb">Beginner approach to the last layer in APB</a></h2>
+<p>Until you've learned all of the ZBLLs, you should OCLL + PLL to solve the last layer. These algorithms can be found on SpeedCubeDB:</p>
+<ul>
+<li><a href="https://speedcubedb.com/a/3x3/OLL"><strong>OCLL (select "OCLL")</strong></a></li>
+<li><a href="https://speedcubedb.com/a/3x3/PLL"><strong>PLL</strong></a></li>
+</ul>
+<hr>
+<h2 id="image-generation-links-5"><a class="header" href="#image-generation-links-5">Image generation links</a></h2>
+<div class="footnote-definition" id="zbll"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;r=y30x-30&amp;bg=t">https://visualcube.api.cubing.net/?fmt=svg&amp;size=250&amp;r=y30x-30&amp;bg=t</a></p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
