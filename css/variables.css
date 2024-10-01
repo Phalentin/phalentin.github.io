@@ -41,8 +41,8 @@
     --quote-bg: hsl(234, 21%, 18%);
     --quote-border: hsl(234, 21%, 23%);
 
-    --warning-fg: #bd4500;
-    --warning-bg: #331400;
+    --warning-fg: #007add;
+    --warning-bg: #001320;
 
     --table-border-color: hsl(200, 7%, 13%);
     --table-header-bg: hsl(200, 7%, 28%);
@@ -87,8 +87,8 @@
     --quote-bg: hsl(197, 37%, 96%);
     --quote-border: hsl(197, 37%, 91%);
 
-    --warning-fg: #ff640a;
-    --warning-bg: #ffdcc4;
+    --warning-fg: #0a60ff;
+    --warning-bg: #c4e0ff;
 
     --table-border-color: hsl(0, 0%, 95%);
     --table-header-bg: hsl(0, 0%, 80%);
