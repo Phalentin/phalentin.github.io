@@ -97,8 +97,8 @@ a > .hljs {
 
 .menu-title {
     display: inline-block;
-    font-weight: 200;
-    font-size: 2.4rem;
+    font-weight: 300;
+    font-size: 2rem;
     line-height: var(--menu-bar-height);
     text-align: center;
     margin: 0;
@@ -240,7 +240,7 @@ pre:hover > .buttons {
     opacity: 1
 }
 pre > .buttons :hover {
-    color: var(--sidebar-active);
+    color: var(--sidebar-active-fg);
     border-color: var(--icons-hover);
     background-color: var(--theme-hover);
 }
@@ -517,17 +517,21 @@ ul#searchresults span.teaser em {
 }
 .chapter li a {
     display: block;
-    padding: 0;
+    padding: 0.3em 1em;
     text-decoration: none;
     color: var(--sidebar-fg);
+    border-radius: 14px;
+    width: 100%;
+    transition: color 0.5s, background-color 0.5s;
 }
 
 .chapter li a:hover {
-    color: var(--sidebar-active);
+    background-color: var(--theme-hover);
 }
 
 .chapter li a.active {
-    color: var(--sidebar-active);
+    color: var(--sidebar-active-fg);
+    background-color: var(--sidebar-active-bg);
 }
 
 .chapter li > a.toggle {

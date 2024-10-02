@@ -2,12 +2,12 @@
 
 :root {
     /* Browser default font-size is 16px, this way 1 rem = 10px */
-    font-size: 62.5%;
+    font-size: 65%;
     color-scheme: var(--color-scheme);
 }
 
 html {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Roboto", "Open Sans", sans-serif;
     color: var(--fg);
     background-color: var(--bg);
     text-size-adjust: none;
@@ -47,25 +47,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .hide-boring .boring { display: none; }
 .hidden { display: none !important; }
 
-h2, h3 { margin-block-start: 2.5em; }
-h4, h5 { margin-block-start: 2em; }
-
-.header + .header h3,
-.header + .header h4,
-.header + .header h5 {
-    margin-block-start: 1em;
-}
-
-h1:target::before,
-h2:target::before,
-h3:target::before,
-h4:target::before,
-h5:target::before,
-h6:target::before {
-    display: inline-block;
-    content: "»";
-    margin-inline-start: -30px;
-    width: 30px;
+h1 a {
+    border-bottom: 2px solid var(--fg);
+    width: 100%;
+    display: block;
 }
 
 /* This is broken on Safari as of version 14, but is fixed
@@ -160,19 +145,6 @@ blockquote {
     border-inline-start: 2px solid var(--warning-border);
 }
 
-.warning:before {
-    position: absolute;
-    width: 3rem;
-    height: 3rem;
-    margin-inline-start: calc(-1.5rem - 21px);
-    content: "ⓘ";
-    text-align: center;
-    background-color: var(--bg);
-    color: var(--warning-border);
-    font-weight: bold;
-    font-size: 2rem;
-}
-
 blockquote .warning:before {
     background-color: var(--quote-bg);
 }
@@ -229,4 +201,10 @@ kbd {
 
 .result-no-output {
     font-style: italic;
+}
+
+hr {
+    background-color: var(--fg);
+    height: 2px;
+    border: none;
 }
