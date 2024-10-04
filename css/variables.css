@@ -15,28 +15,28 @@
 /* Themes */
 
 .light {
-    --bg: hsl(0, 0%, 100%);
+    --bg: hsl(217, 100%, 97%);
     --fg: hsl(0, 0%, 0%);
 
-    --sidebar-bg: #fafafa;
+    --sidebar-bg: hsl(222, 100%, 93%);
     --sidebar-fg: hsl(0, 0%, 0%);
     --sidebar-non-existant: #aaaaaa;
-    --sidebar-active-fg: #1f1fff;
-    --sidebar-active-bg: #5959ff50;
+    --sidebar-active-fg: hsl(223, 72%, 25%);
+    --sidebar-active-bg: hsl(221, 100%, 84%);
     --sidebar-spacer: #f4f4f4;
 
     --scrollbar: #8F8F8F;
 
-    --icons: #747474;
-    --icons-hover: #000000;
+    --icons: var(--fg);
+    --icons-hover: hsl(221, 29%, 80%);
 
-    --links: #0b44e0;
+    --links: hsl(222, 91%, 35%);
 
     --inline-code-color: #301900;
 
     --theme-popup-bg: #fafafa;
     --theme-popup-border: #cccccc;
-    --theme-hover: #e6e6e6;
+    --theme-hover: hsl(221, 29%, 80%);
 
     --quote-bg: hsl(197, 37%, 96%);
     --quote-border: hsl(197, 37%, 91%);
@@ -65,41 +65,41 @@
 }
 
 .navy {
-    --bg: #121522;
+    --bg: hsl(221, 76%, 5%);
     --fg: #dfe4ff;
 
-    --sidebar-bg: #10121a;
+    --sidebar-bg: hsl(221, 37%, 11%);
     --sidebar-fg: var(--fg);
-    --sidebar-non-existant: #505274;
-    --sidebar-active-fg: #7aa4ff;
-    --sidebar-active-bg: #4444bd50;
-    --sidebar-spacer: #1e2231;
+    --sidebar-non-existant: #aeb2ff;
+    --sidebar-active-fg: hsl(221, 100%, 72%);
+    --sidebar-active-bg: hsl(222, 50%, 20%);
+    --sidebar-spacer: hsl(221, 93%, 5%);
 
     --scrollbar: var(--sidebar-fg);
 
-    --icons: #ffffff;
-    --icons-hover: #b7b9cc;
+    --icons: #var(--fg);
+    --icons-hover: hsl(221, 27%, 22%);
 
-    --links: #3063d1;
+    --links: hsl(221, 100%, 64%);
 
     --inline-code-color: #ffffff;
 
     --theme-popup-bg: #161923;
     --theme-popup-border: #737480;
-    --theme-hover: #282e40;
+    --theme-hover: hsl(219, 33%, 17%);
 
     --quote-bg: hsl(226, 15%, 17%);
     --quote-border: hsl(226, 15%, 22%);
 
     --warning-border: #ff8e00;
 
-    --table-border-color: hsl(226, 23%, 16%);
-    --table-header-bg: hsl(226, 23%, 31%);
-    --table-alternate-bg: hsl(226, 23%, 14%);
+    --table-border-color: hsl(221, 23%, 16%);
+    --table-header-bg: hsl(221, 23%, 31%);
+    --table-alternate-bg: hsl(221, 23%, 14%);
 
     --searchbar-border-color: #aaa;
-    --searchbar-bg: #aeaec6;
-    --searchbar-fg: #000;
+    --searchbar-bg: #00000000;
+    --searchbar-fg: var(--fg);
     --searchbar-shadow-color: #aaa;
     --searchresults-header-fg: #5f5f71;
     --searchresults-border-color: #5c5c68;
